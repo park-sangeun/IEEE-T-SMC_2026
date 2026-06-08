@@ -397,7 +397,7 @@
           </div>
           <h1>Offline Distributional Reinforcement Learning with Multi-step Returns for Combat Decision-making</h1>
           <p class="subtitle">A practical offline reinforcement learning framework for reliable long-horizon combat decision-making under dynamic mission objectives, target uncertainty, and ammunition-resource constraints.</p>
-          <p class="authors"><strong>Guhyeon Kang^1</strong>, <strong>Sangeun Park^1</strong>, <strong>Jaehwi Lee^2</strong>, <strong>Minhae Kwon^1</strong> · 1^SungKyunKwan University / 2^Soongsil University </p>
+          <p class="authors"><strong>Chanin Eom</strong>, <strong>Jaehwi Lee</strong>, <strong>Minhae Kwon</strong> · Soongsil University / SungKyunKwan University</p>
           <div class="actions">
             <a class="button primary" href="main(5).pdf">Paper PDF</a>
             <a class="button" href="#method">Method</a>
@@ -429,7 +429,7 @@
           </ul>
         </div>
         <div class="figure-box hero-figure">
-          <img src="Figure/fig1_3-1.png" alt="Combat environment illustration" />
+          <img src="Figure/fig1_3.png" alt="Combat environment illustration" />
           <div class="figure-caption">Combat environment: sequential ammunition decisions aim to match the target's final condition with the mission objective.</div>
         </div>
       </div>
@@ -448,7 +448,7 @@
       <div class="section-head"><div><div class="eyebrow">03 / Combat decision process</div><h2>Each decision controls what to use and how much to consume.</h2></div></div>
       <div class="card paper-card reverse">
         <div class="figure-box">
-          <img src="Figure/fig2_4-1.png" alt="Decision-making process" />
+          <img src="Figure/fig2_4.png" alt="Decision-making process" />
           <div class="figure-caption">Agent action: select ammunition type and ammunition consumption according to target and environment states.</div>
         </div>
         <div class="text-block">
@@ -479,7 +479,7 @@
           </ul>
         </div>
         <div class="figure-box">
-          <img src="Figure/methodology_5-1.png" alt="Offline distributional RL actor-critic framework" />
+          <img src="Figure/methodology_5.png" alt="Offline distributional RL actor-critic framework" />
           <div class="figure-caption">Offline distributional RL based on an actor-critic framework.</div>
         </div>
       </div>
@@ -497,11 +497,11 @@
           <div class="png-panel-grid two" style="margin-top:0">
             <div class="png-panel">
               <div class="png-panel-title">Value loss convergence</div>
-              <img src="Figure/value_loss_converge_3-1.png" alt="Value loss convergence" />
+              <img src="Figure/value_loss_converge_3.png" alt="Value loss convergence" />
             </div>
             <div class="png-panel">
               <div class="png-panel-title">Critic loss convergence</div>
-              <img src="Figure/critic_loss_converge_3-1.png" alt="Critic loss convergence" />
+              <img src="Figure/critic_loss_converge_3.png" alt="Critic loss convergence" />
             </div>
           </div>
           <div class="figure-caption">Categorical estimation converges faster than regression-based estimation for value and critic networks.</div>
@@ -522,12 +522,12 @@
         <h3>Multi-step size analysis</h3>
         <p class="note">The proposed method consistently outperforms offline baselines across multi-step sizes. The best multi-step size aligns with the mission achievement timestep: around n=7 for Final and n=10 for Final+Medium.</p>
         <div class="png-panel-grid four">
-          <div class="png-panel compact"><div class="png-panel-title">Final dataset · Achievement</div><img src="Figure/Final_achieve_3-1.png" alt="Final dataset achievement across multi-step sizes" /></div>
-          <div class="png-panel compact"><div class="png-panel-title">Final dataset · Cost efficiency</div><img src="Figure/Final_ce_2-1.png" alt="Final dataset cost efficiency across multi-step sizes" /></div>
-          <div class="png-panel compact"><div class="png-panel-title">Final+Medium dataset · Achievement</div><img src="Figure/FM_achieve_3-1.png" alt="Final plus Medium dataset achievement across multi-step sizes" /></div>
-          <div class="png-panel compact"><div class="png-panel-title">Final+Medium dataset · Cost efficiency</div><img src="Figure/FM_ce_2-1.png" alt="Final plus Medium dataset cost efficiency across multi-step sizes" /></div>
+          <div class="png-panel compact"><div class="png-panel-title">Final dataset · Achievement</div><img src="Figure/Final_achieve_3.png" alt="Final dataset achievement across multi-step sizes" /></div>
+          <div class="png-panel compact"><div class="png-panel-title">Final dataset · Cost efficiency</div><img src="Figure/Final_ce_2.png" alt="Final dataset cost efficiency across multi-step sizes" /></div>
+          <div class="png-panel compact"><div class="png-panel-title">Final+Medium dataset · Achievement</div><img src="Figure/FM_achieve_3.png" alt="Final plus Medium dataset achievement across multi-step sizes" /></div>
+          <div class="png-panel compact"><div class="png-panel-title">Final+Medium dataset · Cost efficiency</div><img src="Figure/FM_ce_2.png" alt="Final plus Medium dataset cost efficiency across multi-step sizes" /></div>
         </div>
-        <div class="png-panel legend" style="margin-top:14px"><img src="Figure/legend_3-1.png" alt="Legend for multi-step analysis" /></div>
+        <div class="png-panel legend" style="margin-top:14px"><img src="Figure/legend_3.png" alt="Legend for multi-step analysis" /></div>
         <div class="figure-caption">Achievement and cost efficiency across multi-step return sizes for Final and Final+Medium datasets.</div>
       </div>
 
@@ -561,7 +561,7 @@
       </div>
     </section>
 
-    <!-- <section class="container" id="citation">
+    <section class="container" id="citation">
       <div class="section-head"><div><div class="eyebrow">06 / Citation</div><h2>Cite this work</h2></div></div>
       <div class="card bibtex"><pre>@article{eom2025offline_distributional_rl_combat,
   title   = {Offline Distributional Reinforcement Learning with Multi-step Returns for Combat Decision-making},
@@ -569,8 +569,9 @@
   journal = {IEEE Transactions on Systems, Man, and Cybernetics: Systems},
   year    = {2025}
 }</pre></div>
-    </section> -->
+    </section>
   </main>
 
+  <footer class="container">Project page generated from the attached manuscript. Put PNG figures under the <strong>Figure/</strong> directory using the file names referenced in this HTML.</footer>
 </body>
 </html>
