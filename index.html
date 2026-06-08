@@ -160,7 +160,7 @@
       padding:18px;
       display:grid;
       grid-template-columns:1fr;
-      gap:12px;
+      gap:10px;
       align-content:start;
     }
     .mission-title{
@@ -176,10 +176,10 @@
     .mission-item{
       border:1px solid var(--line-dark);
       background:rgba(255,255,255,.045);
-      padding:12px;
+      padding:10px 12px;
     }
-    .mission-item span{display:block;color:#a9b58e;text-transform:uppercase;letter-spacing:.11em;font-size:.72rem;font-weight:950}
-    .mission-item strong{display:block;color:#f4ecd2;font-size:1rem;margin-top:4px;line-height:1.25}
+    .mission-item span{display:block;color:#a9b58e;text-transform:uppercase;letter-spacing:.11em;font-size:.70rem;font-weight:950}
+    .mission-item strong{display:block;color:#f4ecd2;font-size:.94rem;margin-top:4px;line-height:1.28}
 
     section{padding:42px 0}
     .section-head{
@@ -335,12 +335,12 @@
     .png-panel.compact img{height:250px}
     .png-panel.legend img{height:auto;max-height:110px;padding:10px}
 
-    .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-    .table-wrap{width:100%;overflow-x:auto}
-    .table-wrap table{min-width:720px}
-    table{width:100%;border-collapse:collapse;border-radius:4px;overflow:hidden;background:#f8f6ee;font-size:.9rem;font-weight:700}
-    th,td{padding:11px 12px;border-bottom:1px solid #d0c8b1;text-align:left;vertical-align:top}
-    th{background:#dcd5c1;color:#363d2e;font-weight:950;text-transform:uppercase;font-size:.78rem;letter-spacing:.04em}
+    .results-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:16px}
+    .table-wrap{width:100%;max-width:100%;overflow-x:hidden}
+    .table-wrap table{min-width:0;table-layout:fixed}
+    table{width:100%;border-collapse:collapse;border-radius:4px;overflow:hidden;background:#f8f6ee;font-size:.88rem;font-weight:700}
+    th,td{padding:10px 10px;border-bottom:1px solid #d0c8b1;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+    th{background:#dcd5c1;color:#363d2e;font-weight:950;text-transform:uppercase;font-size:.76rem;letter-spacing:.035em}
     tr:last-child td{border-bottom:0}
     .highlight{color:#283f18;font-weight:950}
     .orange{color:#8a5a19;font-weight:950}
@@ -360,6 +360,18 @@
     .mdp-item{border:1px solid rgba(255,255,255,.18);padding:13px;background:rgba(255,255,255,.05)}
     .mdp-item span{display:block;color:#c8a24a;text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;font-weight:950;margin-bottom:6px}
     .mdp-item code{font-family:"Roboto Mono","Courier New",monospace;color:#f6f0d8;font-size:.9rem}
+    .formula{
+      font-family:"Roboto Mono","Courier New",monospace;
+      color:#f6f0d8;
+      font-size:.92rem;
+      line-height:1.75;
+      letter-spacing:0;
+      word-spacing:0;
+      white-space:normal;
+    }
+    .formula sub{font-size:.68em;vertical-align:-.32em;margin-left:1px}
+    .formula sup{font-size:.64em;vertical-align:.62em;margin-left:1px}
+    .formula .op{color:#d7c28a}
 
 
 
@@ -414,7 +426,8 @@
     @media(max-width:1160px){
       .hero-grid,.paper-card,.paper-card.reverse{grid-template-columns:1fr}
       .mission-panel{max-width:700px}
-      .grid-3,.method,.metrics,.results-grid,.mdp-grid{grid-template-columns:repeat(2,1fr)}
+      .grid-3,.method,.metrics,.mdp-grid{grid-template-columns:repeat(2,1fr)}
+      .results-grid{grid-template-columns:1fr}
     }
     @media(max-width:760px){
       .nav-links{display:none}
@@ -456,7 +469,7 @@
           <p class="subtitle">A practical offline reinforcement learning framework for reliable long-horizon combat decision-making under dynamic mission objectives, target uncertainty, and ammunition-resource constraints.</p>
           <p class="authors"><strong>Guhyeon Kang<sup>1</sup></strong>, <strong>Sangeun Park<sup>1</sup></strong>, <strong>Jaehwi Lee<sup>2</sup></strong>, <strong>Minhae Kwon<sup>1</sup></strong> · <span class="affil"><sup>1</sup>SungKyunKwan University</span> / <span class="affil"><sup>2</sup>Soongsil University</span></p>
           <div class="actions">
-            <a class="button primary" href="main(5).pdf">Paper PDF</a>
+            <a class="button primary" href="main(6).pdf">Paper PDF</a>
             <a class="button" href="#method">Method</a>
             <a class="button" href="#results">Results</a>
           </div>
@@ -464,9 +477,12 @@
         <aside class="mission-panel" aria-label="Project summary">
           <h2 class="mission-title">Mission profile</h2>
           <div class="mission-item"><span>Training regime</span><strong>Offline learning from pre-collected combat datasets</strong></div>
+          <div class="mission-item"><span>Combat setup</span><strong>Friendly units engage a moving target under resource limits</strong></div>
+          <div class="mission-item"><span>State signal</span><strong>Desired effect, target type, defense, condition, distance, inventory</strong></div>
           <div class="mission-item"><span>Decision variable</span><strong>Ammunition type + consumption level</strong></div>
           <div class="mission-item"><span>Value estimator</span><strong>Categorical distribution over multi-step returns</strong></div>
-          <div class="mission-item"><span>Policy objective</span><strong>Match commander-specified desired target condition</strong></div>
+          <div class="mission-item"><span>Offline risk control</span><strong>Advantage-weighted behavior cloning on high-valued actions</strong></div>
+          <div class="mission-item"><span>Evaluation focus</span><strong>Mission achievement, cost efficiency, and total reward</strong></div>
         </aside>
       </div>
     </header>
@@ -478,10 +494,12 @@
       <div class="card paper-card">
         <div class="text-block">
           <h3>Problem statement</h3>
-          <p class="note">RL-based combat systems face two deployment barriers: online trial-and-error is unsafe or impractical in mission-critical environments, and one-step TD targets can produce short-sighted value estimates that fail to capture delayed mission outcomes.</p>
+          <p class="note">Accurate and reliable combat decision-making requires policies that operate under dynamic target information, limited ammunition resources, and commander-specified mission objectives. Online trial-and-error is unsafe or impractical in mission-critical environments, while conventional one-step TD targets can produce short-sighted value estimates that fail to capture delayed mission outcomes.</p>
+          <p class="note" style="margin-top:12px">This project page summarizes an offline distributional RL framework that learns entirely from pre-collected combat data. The method combines multi-step return targets with categorical value estimators, then uses an advantage-aware actor objective to improve policy learning while avoiding unreliable out-of-distribution actions.</p>
           <ul class="list">
             <li>Combat decisions must select both ammunition type and consumption level.</li>
             <li>The policy must match a commander-specified desired target condition, not simply maximize damage.</li>
+            <li>Distributional value estimation stabilizes long-horizon learning by modeling return uncertainty rather than a single scalar value.</li>
             <li>Offline RL must avoid out-of-distribution action errors while still learning from mixed-quality datasets.</li>
           </ul>
         </div>
@@ -514,9 +532,9 @@
           <div class="card blueprint-card" style="margin-top:16px;padding:18px;box-shadow:none">
             <h3>MDP compact view</h3>
             <div class="mdp-grid">
-              <div class="mdp-item"><span>State</span><code>sₜ=[vₑ,kₑ,bₑ,hₜ,dₜ,lₜ]</code></div>
-              <div class="mdp-item"><span>Action</span><code>aₜ=[aᵃᵐᵐᵒₜ,aᶜᵒˢᵗₜ]</code></div>
-              <div class="mdp-item"><span>Objective</span><code>min |hᵛᵉ-hₜ|</code></div>
+              <div class="mdp-item"><span>State</span><div class="formula">s<sub>t</sub> <span class="op">=</span> [v<sub>e</sub>, k<sub>e</sub>, b<sub>e</sub>, h<sub>t</sub>, d<sub>t</sub>, l<sub>t</sub>]</div></div>
+              <div class="mdp-item"><span>Action</span><div class="formula">a<sub>t</sub> <span class="op">=</span> [a<sup>ammo</sup><sub>t</sub>, a<sup>cost</sup><sub>t</sub>]</div></div>
+              <div class="mdp-item"><span>Objective</span><div class="formula">π<sup>*</sup> <span class="op">=</span> arg min<sub>π</sub> |h<sub>ve</sub> − h<sub>T</sub>|</div></div>
             </div>
           </div>
         </div>
