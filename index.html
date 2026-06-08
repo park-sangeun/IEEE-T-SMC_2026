@@ -103,6 +103,43 @@
       .figure-box .figure-pdf{height:320px;}
       .hero-figure .figure-pdf{height:340px;}
     }
+
+
+    /* Multi-panel external PDF figure layout */
+    .pdf-panel-grid{
+      display:grid;
+      gap:16px;
+      margin-top:16px;
+      align-items:start;
+    }
+    .pdf-panel-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .pdf-panel-grid.four{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .pdf-panel{
+      overflow:hidden;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:0 12px 30px rgba(21,32,51,.07);
+    }
+    .pdf-panel .figure-pdf{
+      height:320px;
+      background:#fff;
+    }
+    .pdf-panel.compact .figure-pdf{height:245px;}
+    .pdf-panel.legend .figure-pdf{height:86px;}
+    .pdf-panel-title{
+      padding:10px 13px;
+      border-bottom:1px solid var(--line);
+      background:#f8faff;
+      font-weight:850;
+      font-size:.9rem;
+      color:#334155;
+    }
+    @media(max-width:900px){
+      .pdf-panel-grid.two,.pdf-panel-grid.four{grid-template-columns:1fr;}
+      .pdf-panel .figure-pdf{height:300px;}
+      .pdf-panel.compact .figure-pdf{height:260px;}
+    }
 </style>
 </head>
 <body>
@@ -142,7 +179,7 @@
 </ul>
 </div>
 <div class="figure-box">
-<object aria-label="Combat environment illustration" class="figure-pdf" data="Figure/combat_environment_illustration.pdf" type="application/pdf"><a href="Figure/combat_environment_illustration.pdf">Open figure: Combat environment illustration</a></object>
+<object aria-label="Combat environment illustration" class="figure-pdf" data="Figure/fig1_3.pdf" type="application/pdf"><a href="Figure/fig1_3.pdf">Open figure: Combat environment illustration</a></object>
 <div class="figure-caption">Combat environment: sequential ammunition decisions aim to match the target's final condition with the mission objective.</div>
 </div>
 </div>
@@ -159,7 +196,7 @@
 <div class="section-head"><div><div class="eyebrow">Combat decision process</div><h2>Each decision controls what to use and how much to consume.</h2></div></div>
 <div class="card paper-card reverse">
 <div class="figure-box">
-<object aria-label="Decision-making process" class="figure-pdf" data="Figure/decision_making_process.pdf" type="application/pdf"><a href="Figure/decision_making_process.pdf">Open figure: Decision-making process</a></object>
+<object aria-label="Decision-making process" class="figure-pdf" data="Figure/fig2_4.pdf" type="application/pdf"><a href="Figure/fig2_4.pdf">Open figure: Decision-making process</a></object>
 <div class="figure-caption">Agent action: select ammunition type and ammunition consumption according to target and environment states.</div>
 </div>
 <div class="text-block">
@@ -186,7 +223,7 @@
 </ul>
 </div>
 <div class="figure-box">
-<object aria-label="Offline distributional RL actor-critic framework" class="figure-pdf" data="Figure/offline_distributional_rl_framework.pdf" type="application/pdf"><a href="Figure/offline_distributional_rl_framework.pdf">Open figure: Offline distributional RL actor-critic framework</a></object>
+<object aria-label="Offline distributional RL actor-critic framework" class="figure-pdf" data="Figure/methodology_5.pdf" type="application/pdf"><a href="Figure/methodology_5.pdf">Open figure: Offline distributional RL actor-critic framework</a></object>
 <div class="figure-caption">Offline distributional RL based on an actor-critic framework.</div>
 </div>
 </div>
@@ -199,8 +236,17 @@
 <section class="container" id="results">
 <div class="section-head"><div><div class="eyebrow">Simulation results</div><h2>Higher offline performance and more stable degradation under mixed-quality data.</h2></div></div>
 <div class="card paper-card reverse">
-<div class="figure-box">
-<object aria-label="Convergence speed comparison" class="figure-pdf" data="Figure/convergence_speed_comparison.pdf" type="application/pdf"><a href="Figure/convergence_speed_comparison.pdf">Open figure: Convergence speed comparison</a></object>
+<div>
+<div class="pdf-panel-grid two" style="margin-top:0">
+<div class="pdf-panel">
+<div class="pdf-panel-title">Value loss convergence</div>
+<object aria-label="Value loss convergence" class="figure-pdf" data="Figure/value_loss_converge_3.pdf" type="application/pdf"><a href="Figure/value_loss_converge_3.pdf">Open figure: Value loss convergence</a></object>
+</div>
+<div class="pdf-panel">
+<div class="pdf-panel-title">Critic loss convergence</div>
+<object aria-label="Critic loss convergence" class="figure-pdf" data="Figure/critic_loss_converge_3.pdf" type="application/pdf"><a href="Figure/critic_loss_converge_3.pdf">Open figure: Critic loss convergence</a></object>
+</div>
+</div>
 <div class="figure-caption">Categorical estimation converges faster than regression-based estimation for value and critic networks.</div>
 </div>
 <div class="text-block">
@@ -217,10 +263,28 @@
 <div class="card" style="margin-top:18px;padding:clamp(22px,3vw,34px)">
 <h3>Multi-step size analysis</h3>
 <p class="note">The proposed method consistently outperforms offline baselines across multi-step sizes. The best multi-step size aligns with the mission achievement timestep: around n=7 for Final and n=10 for Final+Medium.</p>
-<div class="figure-box" style="margin-top:16px">
-<object aria-label="Performance across multi-step sizes" class="figure-pdf" data="Figure/performance_across_multistep_sizes.pdf" type="application/pdf"><a href="Figure/performance_across_multistep_sizes.pdf">Open figure: Performance across multi-step sizes</a></object>
-<div class="figure-caption">Achievement and cost efficiency across multi-step return sizes for Final and Final+Medium datasets.</div>
+<div class="pdf-panel-grid four">
+<div class="pdf-panel compact">
+<div class="pdf-panel-title">Final dataset · Achievement</div>
+<object aria-label="Final dataset achievement across multi-step sizes" class="figure-pdf" data="Figure/Final_achieve_3.pdf" type="application/pdf"><a href="Figure/Final_achieve_3.pdf">Open figure: Final achievement</a></object>
 </div>
+<div class="pdf-panel compact">
+<div class="pdf-panel-title">Final dataset · Cost efficiency</div>
+<object aria-label="Final dataset cost efficiency across multi-step sizes" class="figure-pdf" data="Figure/Final_ce_2.pdf" type="application/pdf"><a href="Figure/Final_ce_2.pdf">Open figure: Final cost efficiency</a></object>
+</div>
+<div class="pdf-panel compact">
+<div class="pdf-panel-title">Final+Medium dataset · Achievement</div>
+<object aria-label="Final plus Medium dataset achievement across multi-step sizes" class="figure-pdf" data="Figure/FM_achieve_3.pdf" type="application/pdf"><a href="Figure/FM_achieve_3.pdf">Open figure: Final+Medium achievement</a></object>
+</div>
+<div class="pdf-panel compact">
+<div class="pdf-panel-title">Final+Medium dataset · Cost efficiency</div>
+<object aria-label="Final plus Medium dataset cost efficiency across multi-step sizes" class="figure-pdf" data="Figure/FM_ce_2.pdf" type="application/pdf"><a href="Figure/FM_ce_2.pdf">Open figure: Final+Medium cost efficiency</a></object>
+</div>
+</div>
+<div class="pdf-panel legend" style="margin-top:16px">
+<object aria-label="Legend for multi-step analysis" class="figure-pdf" data="Figure/legend_3.pdf" type="application/pdf"><a href="Figure/legend_3.pdf">Open figure: legend</a></object>
+</div>
+<div class="figure-caption">Achievement and cost efficiency across multi-step return sizes for Final and Final+Medium datasets.</div>
 </div>
 <div class="results-grid">
 <div class="card" style="padding:24px">
