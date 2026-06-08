@@ -425,6 +425,174 @@
       font-size:.9rem;
     }
 
+
+
+    /* Motion and interaction layer */
+    :root{
+      --motion-fast:160ms;
+      --motion-med:260ms;
+      --hover-lift:-6px;
+      --hover-scale:1.015;
+    }
+
+    .nav,
+    .button,
+    .tag,
+    .mission-item,
+    .card,
+    .figure-box,
+    .png-panel,
+    .metric,
+    .step,
+    .feature,
+    .mdp-item,
+    th,
+    td{
+      transition:
+        transform var(--motion-med) ease,
+        background-color var(--motion-med) ease,
+        border-color var(--motion-med) ease,
+        box-shadow var(--motion-med) ease,
+        color var(--motion-med) ease,
+        filter var(--motion-med) ease,
+        opacity var(--motion-med) ease;
+    }
+
+    .nav.scrolled{
+      background:rgba(26,31,22,.97);
+      box-shadow:0 12px 32px rgba(0,0,0,.28);
+    }
+
+    .tag:hover{
+      transform:translateY(-2px);
+      border-color:rgba(200,162,74,.55);
+      background:rgba(200,162,74,.14);
+      color:#fff7df;
+    }
+
+    .button:hover{
+      transform:translateY(-3px) scale(1.025);
+      border-color:rgba(245,239,217,.34);
+      box-shadow:0 12px 24px rgba(0,0,0,.20);
+    }
+
+    .mission-item:hover{
+      transform:translateX(4px);
+      border-color:rgba(200,162,74,.42);
+      background:rgba(200,162,74,.075);
+    }
+
+    .card:hover{
+      transform:translateY(var(--hover-lift));
+      box-shadow:0 24px 58px rgba(0,0,0,.36);
+      border-color:#c8b98f;
+    }
+
+    .paper-card:hover,
+    .blueprint-card:hover{
+      transform:translateY(-4px);
+    }
+
+    .feature:hover .icon,
+    .step:hover:before{
+      background:#1e2419;
+      color:#e2bd5f;
+      transform:scale(1.06);
+    }
+
+    .feature:hover:after{
+      color:rgba(63,69,51,.18);
+      transform:translateY(-6px);
+    }
+
+    .figure-box:hover,
+    .png-panel:hover{
+      transform:translateY(-5px);
+      border-color:#c8a24a;
+      box-shadow:0 20px 42px rgba(0,0,0,.24);
+    }
+
+    .figure-box:hover img,
+    .png-panel:hover img{
+      filter:contrast(1.035) saturate(1.035);
+      transform:scale(var(--hover-scale));
+    }
+
+    .figure-box img,
+    .png-panel img{
+      transition:transform var(--motion-med) ease, filter var(--motion-med) ease;
+      transform-origin:center center;
+    }
+
+    .metric:hover{
+      background:#f3ecd8;
+      transform:translateY(-4px);
+      border-color:#c8a24a;
+    }
+
+    .metric:hover .metric-value{
+      color:#7b5b18;
+    }
+
+    .mdp-item:hover{
+      transform:translateY(-3px);
+      border-color:rgba(200,162,74,.55);
+      background:rgba(200,162,74,.09);
+    }
+
+    tbody tr{
+      transition:background-color var(--motion-fast) ease, transform var(--motion-fast) ease;
+    }
+    tbody tr:hover{
+      background:#efe7cf;
+    }
+    tbody tr:hover td:first-child{
+      color:#6f5016;
+    }
+
+    .hero-grid > div:first-child,
+    .mission-panel{
+      animation:heroEnter .72s ease both;
+    }
+    .mission-panel{animation-delay:.08s}
+
+    @keyframes heroEnter{
+      from{opacity:0;transform:translateY(18px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .62s ease, transform .62s ease;
+    }
+    .reveal.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .reveal.delay-1{transition-delay:.06s}
+    .reveal.delay-2{transition-delay:.12s}
+    .reveal.delay-3{transition-delay:.18s}
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation:none!important;
+        transition:none!important;
+        scroll-behavior:auto!important;
+      }
+      .card:hover,
+      .figure-box:hover,
+      .png-panel:hover,
+      .button:hover,
+      .tag:hover,
+      .mission-item:hover,
+      .metric:hover,
+      .mdp-item:hover{
+        transform:none!important;
+      }
+      .reveal{opacity:1!important;transform:none!important}
+    }
+
     @media(max-width:1160px){
       .hero-grid,.paper-card,.paper-card.reverse{grid-template-columns:1fr}
       .mission-panel{max-width:700px}
@@ -656,6 +824,34 @@
 
   <script>
     (function(){
+      const nav = document.querySelector('.nav');
+      const updateNav = function(){
+        if(window.scrollY > 10) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      };
+      updateNav();
+      window.addEventListener('scroll', updateNav, {passive:true});
+
+      const revealTargets = document.querySelectorAll('section .section-head, .card, .figure-box, .png-panel, .step, .feature, .metric');
+      revealTargets.forEach(function(el, idx){
+        el.classList.add('reveal');
+        el.classList.add('delay-' + ((idx % 4)));
+      });
+
+      if('IntersectionObserver' in window){
+        const observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+        revealTargets.forEach(function(el){ observer.observe(el); });
+      } else {
+        revealTargets.forEach(function(el){ el.classList.add('in-view'); });
+      }
+
       const modal = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
       const modalCaption = document.getElementById('modalCaption');
